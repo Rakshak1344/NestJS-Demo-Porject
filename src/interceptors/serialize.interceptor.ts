@@ -8,10 +8,10 @@ export function Serialize(dto: ClassConstructor<any>) {
 }
 
 export class SerializeInterceptor implements NestInterceptor {
-  constructor(private dio: ClassConstructor<any>) {}
-  intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
-    console.log("I am running before the handler", context);
+  constructor(private dio: ClassConstructor<any>) {
+  }
 
+  intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
     return next.handle().pipe(map((data: any) => {
         return plainToInstance(UserDto, data, {
           excludeExtraneousValues: true
